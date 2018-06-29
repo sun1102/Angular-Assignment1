@@ -1,0 +1,44 @@
+<input 
+type="text" 
+placeholder="Search by Title..." 
+#query (keyup)="filter(query.value)" class="form-control">
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>TITLE</th>
+        <th>URL</th>
+        <th>CREATED_AT</th>
+        <th>AUTHOR</th>
+        <th>UPDATE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let val of filterDetails">
+        <td>{{ val.title }}</td>
+        <td><a [href]="val.url" class="">{{ val.url }}</a></td>
+        <td>{{ val.created_at }}</td>
+        <td>{{ val.author }}</td>
+        <td><button (click)="onSelecteRow(val)" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Edit</button></td>
+      </tr>
+    </tbody>
+    
+  </table>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">{{selectedRow.title}}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{ selectedRow | json }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
